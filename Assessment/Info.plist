@@ -21,5 +21,16 @@
 			</array>
 		</dict>
 	</dict>
+	<key>GIDClientID</key>
+	<string>4306340151-bgj88uh0b8lm8tf737n1011eq3ihb8qm.apps.googleusercontent.com</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.4306340151-bgj88uh0b8lm8tf737n1011eq3ihb8qm</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

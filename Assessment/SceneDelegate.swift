@@ -13,10 +13,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let scene = (scene as? UIWindowScene) else { return }
+        self.window = UIWindow(windowScene: scene)
+        self.setRootViewController(window: self.window)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -48,5 +47,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
+}
+
+//MARK: - FUNCTIONS -
+extension SceneDelegate {
+    
+    //MARK: - SET ROOT VIEW CONTRLLER -
+    private func setRootViewController(window: UIWindow?) {
+//        if MyUserDefaults.isUserLoggedIn() {
+//            let vc = StoryboardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: TabBarViewController.identifier) as! TabBarViewController
+//            let navController = UINavigationController(rootViewController: vc)
+//            navController.navigationBar.isHidden = true
+//            self.window?.rootViewController = navController
+//        } else {
+        let vc = StoryBoardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: SignInViewController.identifier) as! SignInViewController
+            let navController = UINavigationController(rootViewController: vc)
+            self.window?.rootViewController = navController
+//        }
+        self.window?.makeKeyAndVisible()
+    }
 }
 
