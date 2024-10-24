@@ -28,7 +28,7 @@ class SignInViewController: UIViewController {
             guard error == nil else {
                 return
             }
-            
+            Routing.shared.navigateToHomeScreen(from: self)
         }
     }
 }
