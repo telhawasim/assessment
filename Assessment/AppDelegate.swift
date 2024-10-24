@@ -15,27 +15,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-//        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-//            if let error = error {
-//                // There was an error restoring the sign-in state
-//                print("Error restoring sign-in: \(error.localizedDescription)")
-//                
-//                // Handle the error appropriately, perhaps show a login screen
-//                self.showLoggedOutState()
-//            } else if let user = user {
-//                // Successfully restored the previous sign-in
-//                print("User already signed in: \(user.profile?.email ?? "No email")")
-//                
-//                // Proceed to show the app's signed-in state
-//                self.showLoggedInState(for: user)
-//            } else {
-//                // No previous sign-in state was found
-//                print("No previous sign-in state found.")
-//                
-//                // Handle this by showing the login screen or logged-out state
-//                self.showLoggedOutState()
-//            }
-//        }
+        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+            if let error = error {
+                // There was an error restoring the sign-in state
+                print("Error restoring sign-in: \(error.localizedDescription)")
+                
+                // Handle the error appropriately, perhaps show a login screen
+                self.showLoggedOutState()
+            } else if let user = user {
+                // Successfully restored the previous sign-in
+                print("User already signed in: \(user.profile?.email ?? "No email")")
+                
+                // Proceed to show the app's signed-in state
+                self.showLoggedInState(for: user)
+            } else {
+                // No previous sign-in state was found
+                print("No previous sign-in state found.")
+                
+                // Handle this by showing the login screen or logged-out state
+                self.showLoggedOutState()
+            }
+        }
         return true
     }
     
