@@ -18,28 +18,79 @@ class DetailViewController: UIViewController {
     var ipAddress: String? {
         didSet {
             self.lblIPAddress.text = self.ipAddress
+            self.geoLocationAPICall()
         }
     }
     
     //MARK: - LIFECYCLE -
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getIPAddress()
+        self.ipAddressAPICall()
+    }
+}
+
+//MARK: - FUNCTIONS -
+extension DetailViewController {
+    
+    //MARK: - IP ADDRESS API CALL -
+    private func ipAddressAPICall() {
+        self.fetchIPAddress() { result in
+            switch result {
+            case .success(let success):
+                DispatchQueue.main.async {
+                    self.ipAddress = success
+                }
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+        }
+    }
+    
+    //MARK: - GEO LOCATION API CALL -
+    private func geoLocationAPICall() {
+        self.fetchGeoInformation(ipAddress: self.ipAddress) { result in
+            switch result {
+            case .success(let success):
+                DispatchQueue.main.async {
+                    print("Hello World")
+                }
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+        }
     }
 }
 
 //MARK: - API CALLS -
 extension DetailViewController {
     
-    private func getIPAddress() {
-        NetworkManager.shared.fetchIPAddress { result in
+    //MARK: - FETCH IP ADDRESS -
+    func fetchIPAddress(completion: @escaping (Result<String?, Error>) -> Void) {
+        let urlString = "https://api.ipify.org?format=json"
+        
+        NetworkManager.shared.request(urlString, resultType: IPAdressResponse.self) { result in
             switch result {
-            case .success(let ipAddress):
-                DispatchQueue.main.async {
-                    self.ipAddress = ipAddress
-                }
+            case .success(let ipResponse):
+                completion(.success(ipResponse.ip))
             case .failure(let error):
-                print("Error fetching IP Address: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    //MARK: - FETCH GEO INFORMATION -
+    func fetchGeoInformation(ipAddress: String?, completion: @escaping (Result<GeoLocationResponse?, Error>) -> Void) {
+        guard let ipAddress = self.ipAddress else {
+            return
+        }
+        let urlString = "https://ipinfo.io/\(ipAddress)/geo"
+        
+        NetworkManager.shared.request(urlString, resultType: GeoLocationResponse.self) { result in
+            switch result {
+            case .success(let success):
+                completion(.success(success))
+            case .failure(let failure):
+                completion(.failure(failure))
             }
         }
     }
