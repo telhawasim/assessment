@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleSignIn
+import Network
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -53,34 +54,44 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //MARK: - FUNCTIONS -
 extension SceneDelegate {
     
-    //MARK: - SET ROOT VIEW CONTRLLER -
-    private func setRootViewController(window: UIWindow?) {
-//        if MyUserDefaults.isUserLoggedIn() {
-//            let vc = StoryboardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: TabBarViewController.identifier) as! TabBarViewController
-//            let navController = UINavigationController(rootViewController: vc)
-//            navController.navigationBar.isHidden = true
-//            self.window?.rootViewController = navController
-//        } else {
-        let vc = StoryBoardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: SignInViewController.identifier) as! SignInViewController
-            let navController = UINavigationController(rootViewController: vc)
-            self.window?.rootViewController = navController
-//        }
-        self.window?.makeKeyAndVisible()
-    }
-    
+    //MARK: - CHECK IF USER IS LOGGED IN -
     private func checkIfUserIsLoggedIn(window: UIWindow?) {
-        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-            if let _ = error {
-                let vc = StoryBoardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: SignInViewController.identifier) as! SignInViewController
-                let navController = UINavigationController(rootViewController: vc)
-                self.window?.rootViewController = navController
-            } else if let _ = user {
-                let vc = StoryBoardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: HomeViewController.identifier) as! HomeViewController
-                let navController = UINavigationController(rootViewController: vc)
-                self.window?.rootViewController = navController
+        let monitor = NWPathMonitor()
+        let queue = DispatchQueue(label: "NetworkMonitor")
+
+        monitor.start(queue: queue)
+        
+        monitor.pathUpdateHandler = { path in
+            DispatchQueue.main.async {
+                if path.status == .satisfied {
+                    GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+                        if let _ = error {
+                            self.loginAsRoot()
+                        } else if let _ = user {
+                            self.homeAsRoot()
+                        }
+                    }
+                } else {
+                    GIDSignIn.sharedInstance.signOut()
+                    self.loginAsRoot()
+                }
+                self.window?.makeKeyAndVisible()
             }
         }
-        self.window?.makeKeyAndVisible()
+    }
+    
+    //MARK: - LOGIN AS ROOT -
+    private func loginAsRoot() {
+        let vc = StoryBoardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: SignInViewController.identifier) as! SignInViewController
+        let navController = UINavigationController(rootViewController: vc)
+        self.window?.rootViewController = navController
+    }
+    
+    //MARK: - HOME AS ROOT -
+    private func homeAsRoot() {
+        let vc = StoryBoardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: HomeViewController.identifier) as! HomeViewController
+        let navController = UINavigationController(rootViewController: vc)
+        self.window?.rootViewController = navController
     }
 }
 
