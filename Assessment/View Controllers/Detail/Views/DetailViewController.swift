@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleSignIn
 
 class DetailViewController: UIViewController {
     
@@ -33,6 +34,12 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ipAddressAPICall()
+    }
+    
+    //MARK: - DID TAP LOGOUT -
+    @IBAction func didTapLogout() {
+        GIDSignIn.sharedInstance.signOut()
+        Routing.shared.setRootViewController()
     }
 }
 

@@ -70,15 +70,12 @@ extension SceneDelegate {
     
     private func checkIfUserIsLoggedIn(window: UIWindow?) {
         GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-            if let error = error {
-                // Handle error
-                print("Error restoring previous sign-in: \(error.localizedDescription)")
-            } else if let _ = user {
-                let vc = StoryBoardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: HomeViewController.identifier) as! HomeViewController
+            if let _ = error {
+                let vc = StoryBoardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: SignInViewController.identifier) as! SignInViewController
                 let navController = UINavigationController(rootViewController: vc)
                 self.window?.rootViewController = navController
-            } else {
-                let vc = StoryBoardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: SignInViewController.identifier) as! SignInViewController
+            } else if let _ = user {
+                let vc = StoryBoardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: HomeViewController.identifier) as! HomeViewController
                 let navController = UINavigationController(rootViewController: vc)
                 self.window?.rootViewController = navController
             }

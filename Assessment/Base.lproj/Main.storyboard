@@ -243,6 +243,15 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEs-wm-aJp">
+                                <rect key="frame" x="161" y="732" width="71" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Log out"/>
+                                <connections>
+                                    <action selector="didTapLogout" destination="Rfn-a5-eRG" eventType="touchUpInside" id="SJh-6v-41Y"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uHH-9C-ghp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -252,6 +261,8 @@
                             <constraint firstItem="35V-Vj-Tns" firstAttribute="centerX" secondItem="uHH-9C-ghp" secondAttribute="centerX" id="Vmm-Qi-P04"/>
                             <constraint firstItem="9Z0-4V-cIx" firstAttribute="centerY" secondItem="uHH-9C-ghp" secondAttribute="centerY" id="XBA-5r-nA4"/>
                             <constraint firstItem="35V-Vj-Tns" firstAttribute="top" secondItem="uHH-9C-ghp" secondAttribute="top" constant="50" id="gWA-RE-oKe"/>
+                            <constraint firstItem="NEs-wm-aJp" firstAttribute="centerX" secondItem="uHH-9C-ghp" secondAttribute="centerX" id="jwX-VU-YLD"/>
+                            <constraint firstItem="uHH-9C-ghp" firstAttribute="bottom" secondItem="NEs-wm-aJp" secondAttribute="bottom" constant="50" id="kPE-63-vYp"/>
                             <constraint firstItem="uHH-9C-ghp" firstAttribute="trailing" secondItem="9Z0-4V-cIx" secondAttribute="trailing" constant="25" id="shL-VD-Xgd"/>
                         </constraints>
                     </view>

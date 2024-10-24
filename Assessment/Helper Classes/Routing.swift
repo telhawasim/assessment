@@ -37,6 +37,7 @@ class Routing {
     //MARK: - NAVIGATE TO HOME SCREEN -
     func navigateToHomeScreen(from viewController: UIViewController) {
         let vc = StoryBoardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: HomeViewController.identifier) as! HomeViewController
+        vc.navigationItem.hidesBackButton = true
         viewController.navigationController?.pushViewController(vc, animated: true)
     }
     
