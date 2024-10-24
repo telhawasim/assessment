@@ -13,6 +13,13 @@ class DetailViewController: UIViewController {
     
     //UILabel
     @IBOutlet weak var lblIPAddress: UILabel!
+    @IBOutlet weak var lblCity: UILabel!
+    @IBOutlet weak var lblRegion: UILabel!
+    @IBOutlet weak var lblCountry: UILabel!
+    @IBOutlet weak var lblLocation: UILabel!
+    @IBOutlet weak var lblCompany: UILabel!
+    @IBOutlet weak var lblPostal: UILabel!
+    @IBOutlet weak var lblTimeZone: UILabel!
     
     //MARK: - VARIABLES -
     var ipAddress: String? {
@@ -52,7 +59,13 @@ extension DetailViewController {
             switch result {
             case .success(let success):
                 DispatchQueue.main.async {
-                    print("Hello World")
+                    self.lblCity.text = success?.city
+                    self.lblRegion.text = success?.region
+                    self.lblCountry.text = success?.country
+                    self.lblLocation.text = success?.loc
+                    self.lblCompany.text = success?.org
+                    self.lblPostal.text = success?.postal
+                    self.lblTimeZone.text = success?.timezone
                 }
             case .failure(let failure):
                 print(failure.localizedDescription)
