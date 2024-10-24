@@ -39,4 +39,10 @@ class Routing {
         let vc = StoryBoardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: HomeViewController.identifier) as! HomeViewController
         viewController.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    //MARK: - NAVIGATE TO DETAIL SCREEN -
+    func navigateToDetailScreen(from viewController: UIViewController) {
+        let vc = StoryBoardEnum.main.getStoryboard?.instantiateViewController(identifier: DetailViewController.identifier) as! DetailViewController
+        viewController.navigationController?.pushViewController(vc, animated: true)
+    }
 }

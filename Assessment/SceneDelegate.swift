@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleSignIn
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -15,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: scene)
-        self.setRootViewController(window: self.window)
+        self.checkIfUserIsLoggedIn(window: self.window)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -64,6 +65,24 @@ extension SceneDelegate {
             let navController = UINavigationController(rootViewController: vc)
             self.window?.rootViewController = navController
 //        }
+        self.window?.makeKeyAndVisible()
+    }
+    
+    private func checkIfUserIsLoggedIn(window: UIWindow?) {
+        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+            if let error = error {
+                // Handle error
+                print("Error restoring previous sign-in: \(error.localizedDescription)")
+            } else if let _ = user {
+                let vc = StoryBoardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: HomeViewController.identifier) as! HomeViewController
+                let navController = UINavigationController(rootViewController: vc)
+                self.window?.rootViewController = navController
+            } else {
+                let vc = StoryBoardEnum.main.getStoryboard?.instantiateViewController(withIdentifier: SignInViewController.identifier) as! SignInViewController
+                let navController = UINavigationController(rootViewController: vc)
+                self.window?.rootViewController = navController
+            }
+        }
         self.window?.makeKeyAndVisible()
     }
 }

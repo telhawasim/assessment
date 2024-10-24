@@ -80,13 +80,60 @@
                     <view key="view" contentMode="scaleToFill" id="hpV-Lz-Na3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fM-fE-AmQ">
+                                <rect key="frame" x="98.333333333333329" y="340.33333333333331" width="196.33333333333337" height="196.33333333333331"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="1fM-fE-AmQ" secondAttribute="height" multiplier="1:1" id="4i5-7B-3Ig"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Qve-zu-SDT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1fM-fE-AmQ" firstAttribute="centerX" secondItem="Qve-zu-SDT" secondAttribute="centerX" id="8ae-eF-hdS"/>
+                            <constraint firstItem="1fM-fE-AmQ" firstAttribute="width" secondItem="hpV-Lz-Na3" secondAttribute="width" multiplier="0.5" id="YkI-OX-isS"/>
+                            <constraint firstItem="1fM-fE-AmQ" firstAttribute="centerY" secondItem="Qve-zu-SDT" secondAttribute="centerY" id="c1s-ql-hWy"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="centerView" destination="1fM-fE-AmQ" id="Vpy-ic-P12"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xtr-fg-ouy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1556" y="4"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="sR2-A9-0OA">
+            <objects>
+                <viewController storyboardIdentifier="DetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Rfn-a5-eRG" customClass="DetailViewController" customModule="Assessment" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PyL-K2-XJT">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35V-Vj-Tns">
+                                <rect key="frame" x="196.66666666666666" y="109" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="uHH-9C-ghp"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="35V-Vj-Tns" firstAttribute="centerX" secondItem="uHH-9C-ghp" secondAttribute="centerX" id="Vmm-Qi-P04"/>
+                            <constraint firstItem="35V-Vj-Tns" firstAttribute="top" secondItem="uHH-9C-ghp" secondAttribute="top" constant="50" id="gWA-RE-oKe"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="lblIPAddress" destination="35V-Vj-Tns" id="pU2-jm-uH6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gBK-NG-HFb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2259" y="4"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dvp-hY-joE">
