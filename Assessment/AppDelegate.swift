@@ -15,16 +15,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-            if error != nil || user == nil {
-                // Show the app's signed-out state.
-                print(user?.userID ?? "")
-            } else {
-                // Show the app's signed-in state.
-                print(error?.localizedDescription ?? "")
-            }
-        }
+//        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+//            if let error = error {
+//                // There was an error restoring the sign-in state
+//                print("Error restoring sign-in: \(error.localizedDescription)")
+//                
+//                // Handle the error appropriately, perhaps show a login screen
+//                self.showLoggedOutState()
+//            } else if let user = user {
+//                // Successfully restored the previous sign-in
+//                print("User already signed in: \(user.profile?.email ?? "No email")")
+//                
+//                // Proceed to show the app's signed-in state
+//                self.showLoggedInState(for: user)
+//            } else {
+//                // No previous sign-in state was found
+//                print("No previous sign-in state found.")
+//                
+//                // Handle this by showing the login screen or logged-out state
+//                self.showLoggedOutState()
+//            }
+//        }
         return true
+    }
+    
+    func showLoggedInState(for user: GIDGoogleUser) {
+        // Handle the signed-in user and update UI
+        print("User is signed in with email: \(user.profile?.email ?? "")")
+        
+        // Proceed with your app's logic (navigate to home screen, etc.)
+    }
+
+    func showLoggedOutState() {
+        // Handle the logged-out state (show sign-in screen, etc.)
+        print("User is logged out.")
+        
+        // Proceed with your app's logic (navigate to login screen, etc.)
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
